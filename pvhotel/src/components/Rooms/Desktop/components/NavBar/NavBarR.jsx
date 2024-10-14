@@ -87,10 +87,10 @@ const NavbarR = () => {
         <Link to="/">Home</Link>
         <a href="#explore">Explore</a>
         <Link to="/Rooms">Rooms</Link>
-        <a href="#restaurants">Restaurants</a>
+        <Link to="/Restaurants">Restaurants</Link>
         <a href="#contact">Contact</a>
       </NavLinks>
-
+      
       <UserMenu>
         <BookNowButton>Book Now</BookNowButton>
         

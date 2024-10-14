@@ -1,10 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-import NavbarR from "./components/NavBar/NavBarR";
-import Hero from "./components/Hero/Hero";
-import RoomGrid from "./components/RoomGrid/RoomGrid";
-import FooterR from "./components/Footer/Footer";
+import NavbarRes from "./components/NavBar/NavBarRes";
 
 const Container = styled.div`
     display: flex;
@@ -23,14 +20,12 @@ margin-right: 0px;
 
 
 
-const RoomD =()=>
+const RestaurantD =()=>
 {
     return(
         <AppContainer>
-           <NavbarR/>
-           <Hero/>
-           <RoomGrid/>
-           <FooterR/>
+           <NavbarRes/>
+           
         </AppContainer>
        
 
@@ -38,4 +33,4 @@ const RoomD =()=>
     );
 }
 
-export default RoomD;
+export default RestaurantD;

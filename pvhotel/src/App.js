@@ -4,6 +4,7 @@ import HomePageD from './components/HomePage/Desktop/HomePageD';
 import RoomD from './components/Rooms/Desktop/RoomsD';
 import { createGlobalStyle,styled } from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import RestaurantD from './components/Restaurants/Desktop/RestaurantD';
 
 const AppContainer = styled.div`
 display: flex;
@@ -23,6 +24,7 @@ function App() {
       <Routes>
       <Route path="/" element={ <HomePageD/>} />
       <Route path="/Rooms" element={<RoomD/>} />
+      <Route path="/Restaurants" element={<RestaurantD/>} />
       </Routes>
      </Router>
    

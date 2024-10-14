@@ -4,6 +4,8 @@ import { FaUser, FaBars } from 'react-icons/fa';
 import logo from '../../../../../assets/logo.svg'
 import menu from '../../../../../assets/gg_menu.svg'
 import user from '../../../../../assets/user.svg'
+import cart from '../../../../../assets/cart.svg'
+
 
 import { Link } from 'react-router-dom';
 
@@ -77,7 +79,7 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Navbar = () => {
+const NavbarRes = () => {
   return (
     <NavbarWrapper>
       <Logo>
@@ -94,16 +96,19 @@ const Navbar = () => {
       </NavLinks>
 
       <UserMenu>
-        <BookNowButton>Book Now</BookNowButton>
+        
         <IconWrapper>
           <img src={menu} alt="" />
         </IconWrapper>
         <IconWrapper>
           <img src={user} alt="" />
         </IconWrapper>
+        <IconWrapper>
+          <img src={cart} alt="" />
+        </IconWrapper>
       </UserMenu>
     </NavbarWrapper>
   );
 };
 
-export default Navbar;
+export default NavbarRes;
