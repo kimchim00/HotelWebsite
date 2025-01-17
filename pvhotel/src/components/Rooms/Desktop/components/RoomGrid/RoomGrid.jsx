@@ -4,10 +4,11 @@ import room2 from '../../../../../assets/room3.png'
 import wifiR from '../../../../../assets/wifiR.svg'
 import shower from '../../../../../assets/shower.svg'
 import tv from '../../../../../assets/tv.svg'
-
+import { Link } from "react-router-dom";
 
 // Styled-components for the card grid and individual room card
 const CardGrid = styled.div`
+justify-content: center;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 30px;
@@ -205,7 +206,7 @@ const RoomGrid = () => {
             <img src={tv} alt="Feature 3" />
             </Rec>
           </Features>
-          <BookButton>Book Now</BookButton>
+          <BookButton><Link to={"/Rooms/detail"}>Book Now</Link></BookButton>
           </Row>
         </RoomCard>
       ))}

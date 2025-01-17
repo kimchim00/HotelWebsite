@@ -1,17 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import Slider from "react-slick";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import room1 from '../../../../../assets/res1.jpg';
-import room2 from '../../../../../assets/res2.jpg';
-import room3 from '../../../../../assets/res3.jpg';
+import res1 from "../../../../../assets/res1.jpg";
+import res2 from "../../../../../assets/res2.jpg";
+import res3 from "../../../../../assets/res3.jpg";
 
-
-const RoomsWrapper = styled.div`
+// Styled components
+const Wrapper = styled.div`
   text-align: center;
-  padding: 2rem;
- background-color: white;
-  width: auto;
+  padding: 4rem;
+  background-color: white;
 `;
 
 const Title = styled.h2`
@@ -29,121 +31,99 @@ const Subtitle = styled.p`
   font-family: "Raleway", sans-serif;
 `;
 
-const RoomsGrid = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 30px;
-  text-align: center;
-  justify-content: center;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-`;
-
-const RoomCard = styled.div`
+const Card = styled.div`
   background-color: white;
-  border-radius: 10px;
-
   overflow: hidden;
-  text-align: left;
-  padding: 20px;
+  padding: 40px;
   width: 300px;
   height: 250px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
 `;
 
-const RoomImage = styled.div`
-flex: 3;
-
-img{
+const CardImage = styled.div`
+  flex: 3;
+  img {
     width: 100%;
-  height: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
-}
- 
-  
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 `;
 
-const RoomInfo = styled.div`
-margin-top: -10px;
-flex: 1;
- 
+const CardInfo = styled.div`
+  text-align: center;
+  flex: 1;
 `;
 
-const RoomTitle = styled.h4`
+const CardTitle = styled.h4`
   font-size: 14px;
   font-family: "Raleway", sans-serif;
   font-weight: 400;
 `;
 
-const RoomDetails = styled.p`
-  font-size: 1rem;
-  color: gray;
-`;
-
-const AvailabilityTag = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #7C6A46;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 2.5px;
-  font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  font-size: 11px;
-  
-`;
-
-const RoomCardWrapper = styled.div`
-  position: relative;
-`;
-
-const Restaurants = () => {
-  const roomsList = [
+const RestaurantsCarousel = () => {
+  const restaurantsList = [
     {
-      image: room1,
-      title: 'Italian Restaurant',
-      
+      image: res1,
+      title: "Italian Restaurant",
     },
     {
-      image: room2,
-      title: 'Persian Restaurant',
-      
+      image: res2,
+      title: "Persian Restaurant",
     },
     {
-      image: room3,
-      title: 'French Restaurant',
-      
-    }
+      image: res3,
+      title: "French Restaurant",
+    },
   ];
 
+  // React Slick settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <RoomsWrapper>
-      <Title>Luxurious Retaurants</Title>
-      <Subtitle>Enjoy the best meals at our pleasent places</Subtitle>
-      <RoomsGrid>
-        {roomsList.map((room, index) => (
-          <RoomCardWrapper key={index}>
-            
-            <RoomCard>
-              <RoomImage >
-                <img src={room.image} alt={room.title}/>
-              </RoomImage>
-              <RoomInfo>
-                <RoomTitle>{room.title}</RoomTitle>
-                
-              </RoomInfo>
-            </RoomCard>
-          </RoomCardWrapper>
+    <Wrapper>
+      <Title>Luxurious Restaurants</Title>
+      <Subtitle>Enjoy the best meals at our pleasant places</Subtitle>
+      <Slider {...settings}>
+        {restaurantsList.map((restaurant, index) => (
+          <Card key={index}>
+            <CardImage>
+              <img src={restaurant.image} alt={restaurant.title} />
+            </CardImage>
+            <CardInfo>
+              <CardTitle>{restaurant.title}</CardTitle>
+            </CardInfo>
+          </Card>
         ))}
-      </RoomsGrid>
-    </RoomsWrapper>
+      </Slider>
+    </Wrapper>
   );
 };
 
-export default Restaurants;
+export default RestaurantsCarousel;

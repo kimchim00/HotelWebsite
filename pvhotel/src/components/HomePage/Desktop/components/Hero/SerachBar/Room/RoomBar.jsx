@@ -4,26 +4,29 @@ import DatePicker from 'react-datepicker';
 import available from '../../../../../../../assets/calander.svg';
 import persons from '../../../../../../../assets/person.svg';
 import dropdown from '../../../../../../../assets/dd.svg';
-import 'react-datepicker/dist/react-datepicker.css'; 
-
+import 'react-datepicker/dist/react-datepicker.css';
 
 const BookingFormContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
-  
   padding: 10px;
   padding-left: 0px;
   background-color: white;
   border-radius: 15px;
- width: 100%;
-  
-  
+  width: 100%;
   align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+  }
 `;
 
 const BookingOption = styled.div`
-margin-top: 10px;
-width: 25%;
+  margin-top: 10px;
+  width: 25%;
   display: flex;
   align-items: start;
   flex-direction: row;
@@ -32,8 +35,8 @@ width: 25%;
   padding-left: 0px;
   border-radius: 10px;
   column-gap: 10px;
- z-index: 1000;
-  font-family: 'Poppins', sans-serif; 
+  z-index: 1000;
+  font-family: 'Poppins', sans-serif;
   font-size: 12px;
   color: rgba(28, 28, 28, 0.6);
 
@@ -48,23 +51,34 @@ width: 25%;
     width: 20px;
   }
 
-  &.First{
+  &.First {
     padding-top: 15px;
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
 const SearchButton = styled.button`
-
-background-color: #84643b; 
+  background-color: #84643b;
   color: white;
   border: none;
-  padding: 20px 40px;
+  padding: 15px 30px;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   margin-left: 20px;
-  white-space: nowrap; 
-  flex-shrink: 0; 
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  @media (max-width: 750px) {
+    width: 100%;
+    margin-left: 0;
+    padding: 15px;
+  }
 `;
 
 const StyledDatePicker = styled(DatePicker)`
@@ -74,15 +88,25 @@ const StyledDatePicker = styled(DatePicker)`
   color: rgba(28, 28, 28, 0.6);
   outline: none;
   cursor: pointer;
+  width: 100%;
+
+  @media (max-width: 750px) {
+    font-size: 14px;
+    width: 100%;
+  }
 `;
 
 const CustomSelectContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: 60px; 
+  width: 60px;
   flex-direction: row;
   font-size: 12px;
   color: rgba(28, 28, 28, 0.6);
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const CustomSelect = styled.div`
@@ -94,10 +118,14 @@ const CustomSelect = styled.div`
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-  
-  span{
+
+  span {
     font-size: 12px;
-  color: rgba(28, 28, 28, 0.6);
+    color: rgba(28, 28, 28, 0.6);
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
   }
 `;
 
@@ -128,36 +156,35 @@ const CustomOption = styled.li`
 `;
 
 const DropdownArrow = styled.div`
-align-items: center;
-img{
   align-items: center;
-  width: 8.49px;
-  height: 5.66px;
-}
-  
+  img {
+    align-items: center;
+    width: 8.49px;
+    height: 5.66px;
+  }
+
   transform: ${(props) => (props.isOpen ? 'rotate(180deg)' : 'rotate(0)')};
   transition: transform 0.3s ease;
 `;
 
 const Div = styled.div`
-display: flex;
-flex-direction: column;
-row-gap: 10px;
-&.Person{
-  row-gap: 0px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 
- 
-}
-`
-const Row = styled.div`
-display: flex;
-flex-direction: row;
-`
+  &.Person {
+    row-gap: 0px;
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
+`;
 
 const RoomBar = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [personCount, setPersonCount] = useState(1); 
+  const [personCount, setPersonCount] = useState(1);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleSelect = (value) => {
@@ -167,66 +194,54 @@ const RoomBar = () => {
 
   return (
     <BookingFormContainer>
-   
-      <BookingOption className='First'>
-        
+      <BookingOption className="First">
         <img src={persons} alt="Person Icon" />
-        <Div className='Person'>
-        <span >Person</span>
-        
-        <CustomSelectContainer>
-          <CustomSelect onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-            <span>{personCount}</span>
-            <DropdownArrow  isOpen={isDropdownOpen} >
-              <img src={dropdown} alt="" />
-            </DropdownArrow>
-          </CustomSelect>
-          {isDropdownOpen && (
-            <CustomOptions>
-              {[1, 2, 3, 4].map((person) => (
-                <CustomOption key={person} onClick={() => handleSelect(person)}>
-                  {person}
-                </CustomOption>
-              ))}
-            </CustomOptions>
-          )}
-        </CustomSelectContainer>
+        <Div className="Person">
+          <span>Person</span>
+          <CustomSelectContainer>
+            <CustomSelect onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+              <span>{personCount}</span>
+              <DropdownArrow isOpen={isDropdownOpen}>
+                <img src={dropdown} alt="" />
+              </DropdownArrow>
+            </CustomSelect>
+            {isDropdownOpen && (
+              <CustomOptions>
+                {[1, 2, 3, 4].map((person) => (
+                  <CustomOption key={person} onClick={() => handleSelect(person)}>
+                    {person}
+                  </CustomOption>
+                ))}
+              </CustomOptions>
+            )}
+          </CustomSelectContainer>
         </Div>
       </BookingOption>
 
-     
-      
       <BookingOption>
-
         <img src={available} alt="Calendar Icon" />
         <Div>
           <span>Check in</span>
-       
-        <StyledDatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          dateFormat="dd MMM yyyy" 
-
-        />
-        
-        
+          <StyledDatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="dd MMM yyyy"
+          />
         </Div>
       </BookingOption>
 
-   
       <BookingOption>
         <img src={available} alt="Calendar Icon" />
         <Div>
           <span>Check out</span>
-        <StyledDatePicker
-          selected={endDate}
-          onChange={(date) => setEndDate(date)}
-          dateFormat="dd MMM yyyy" 
-        />
+          <StyledDatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            dateFormat="dd MMM yyyy"
+          />
         </Div>
       </BookingOption>
 
-  
       <SearchButton>Book Now</SearchButton>
     </BookingFormContainer>
   );

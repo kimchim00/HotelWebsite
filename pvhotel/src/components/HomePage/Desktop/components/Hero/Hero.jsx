@@ -15,6 +15,13 @@ const HeroSection = styled.section`
   @media (max-width: 1400px) {
    column-gap: 5%;
   }
+
+  @media (max-width: 750px) {
+   background-image: url(${hero});
+   background-repeat: no-repeat;
+   background-size: cover;
+   
+  }
 `;
 
 const TextSection = styled.div`
@@ -26,6 +33,9 @@ const Div = styled.div`
    font-family: "Dancing Script", cursive;
    font-size: 50px;
    font-weight: 500;
+   @media (max-width: 750px) {
+    font-size: 20px;
+  }
 
 `
 
@@ -33,6 +43,11 @@ const Heading = styled.div`
   font-size: 55px;
   font-weight: bold;
   color: #1C1C1C;
+
+  @media (max-width: 750px) {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 
 `;
 
@@ -43,6 +58,9 @@ const Subheading = styled.div`
   margin-top: 10px;
   font-family: "Raleway", sans-serif;
   font-weight: 500;
+  @media (max-width:750px){
+    display: none;
+  }
 `;
 
 const Button = styled.button`
@@ -56,6 +74,10 @@ const Button = styled.button`
   margin-bottom: 30px;
   &:hover {
     background-color: #725d3b;
+  }
+
+  @media(max-width:750px ){
+    display: none;
   }
 `;
 
@@ -97,6 +119,9 @@ const ImageSection = styled.div`
     border-radius: 0px;
     height: 400px;
     padding-bottom: 50px;
+  }
+  @media (max-width: 750px) {
+   display: none;
   }
   }
   

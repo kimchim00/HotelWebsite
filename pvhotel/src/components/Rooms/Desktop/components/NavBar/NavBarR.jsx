@@ -1,26 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import { FaUser, FaBars } from 'react-icons/fa';
-import logo from '../../../../../assets/logo.svg'
-import menu from '../../../../../assets/gg_menu.svg'
-import user from '../../../../../assets/user.svg'
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 
-import { Link } from 'react-router-dom';
+import logo from "../../../../../assets/logo.svg";
 
 const NavbarWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: auto;
   padding: 20px;
-
   background-color: white;
- 
+  position: relative;
 `;
 
 const Logo = styled.div`
-  font-size: 24px;
-  color: #8d774a;  
+  img {
+    height: 30px;
+  }
 `;
 
 const NavLinks = styled.div`
@@ -28,12 +25,21 @@ const NavLinks = styled.div`
   align-items: center;
   gap: 40px;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 768px) {
+    display: ${(props) => (props.showMenu ? "flex" : "none")};
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
     gap: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
 
   a {
-    margin: 0 15px;
     text-decoration: none;
     color: #333;
     font-weight: 500;
@@ -41,6 +47,17 @@ const NavLinks = styled.div`
     &:hover {
       color: #8d774a;
     }
+  }
+`;
+
+const HamburgerIcon = styled.div`
+  display: none;
+  font-size: 24px;
+  color: #8d774a;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `;
 
@@ -52,49 +69,37 @@ const BookNowButton = styled.button`
   border-radius: 5px;
   font-size: 15px;
   cursor: pointer;
+
   &:hover {
-    background-color: #7C6A46;
+    background-color: #7c6a46;
   }
-`;
-
-const UserMenu = styled.div`
-  display: flex;
-  padding-right: 30px;
-  align-items: center;
-  margin-left: -150px;
-  @media (max-width: 1100px) {
-    margin-left: 0px;
-  }
-
-`;
-
-const IconWrapper = styled.div`
-  margin-left: 15px;
-  font-size: 20px;
-  color: #8d774a;
-  cursor: pointer;
 `;
 
 const NavbarR = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <NavbarWrapper>
       <Logo>
-        
-        <img src={logo} alt="Logo" style={{ height: '30px' }} />
+        <img src={logo} alt="Logo" />
       </Logo>
 
-      <NavLinks>
+      <HamburgerIcon onClick={toggleMenu}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </HamburgerIcon>
+
+      <NavLinks showMenu={menuOpen}>
         <Link to="/">Home</Link>
         <a href="#explore">Explore</a>
         <Link to="/Rooms">Rooms</Link>
         <Link to="/Restaurants">Restaurants</Link>
         <a href="#contact">Contact</a>
-      </NavLinks>
-      
-      <UserMenu>
         <BookNowButton>Book Now</BookNowButton>
-        
-      </UserMenu>
+      </NavLinks>
     </NavbarWrapper>
   );
 };

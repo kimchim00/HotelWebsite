@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import res from '../../../../../../../assets/res.svg';
 import dropdown from '../../../../../../../assets/dd.svg';
 import available from '../../../../../../../assets/calander.svg';
-import search from '../../../../../../../assets/search.svg'
+import search from '../../../../../../../assets/search.svg';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; 
-
 
 const SearchBarContainer = styled.div`
   display: flex;
@@ -17,6 +16,14 @@ const SearchBarContainer = styled.div`
   border-radius: 15px;
   width: 100%;
   align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+    padding: 20px;
+    margin-left: 0;
+    gap: 20px;
+  }
 `;
 
 const SearchOption = styled.div`
@@ -30,7 +37,7 @@ const SearchOption = styled.div`
   padding-left: 0px;
   border-radius: 10px;
   column-gap: 10px;
-  z-index: 1000;
+  
   font-family: 'Poppins', sans-serif;
   font-size: 12px;
   color: rgba(28, 28, 28, 0.6);
@@ -45,6 +52,12 @@ const SearchOption = styled.div`
     height: 20px;
     width: 20px;
   }
+
+  @media (max-width: 750px) {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const SearchButton = styled.button`
@@ -57,6 +70,11 @@ const SearchButton = styled.button`
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
+
+  @media (max-width: 750px) {
+    width: 100%;
+    padding: 15px;
+  }
 `;
 
 const CustomSelectContainer = styled.div`
@@ -65,6 +83,10 @@ const CustomSelectContainer = styled.div`
   width: 60px;
   font-size: 12px;
   color: rgba(28, 28, 28, 0.6);
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const CustomSelect = styled.div`
@@ -81,6 +103,10 @@ const CustomSelect = styled.div`
     font-size: 12px;
     color: rgba(28, 28, 28, 0.6);
   }
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 const CustomOptions = styled.ul`
@@ -94,7 +120,7 @@ const CustomOptions = styled.ul`
   margin: 0;
   color: black;
   border-radius: 10px;
-  z-index: 100;
+  z-index: 1100;
   font-size: 12px;
   color: rgba(28, 28, 28, 0.6);
 `;
@@ -131,35 +157,45 @@ const SearchInput = styled.input`
   flex-grow: 1;
   font-size: 14px;
   border: 1px solid #7C6A46;
-  
 
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
+
 const Div = styled.div`
-display: flex;
-flex-direction: column;
-row-gap: 10px;
-&.Person{
-  row-gap: 0px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 
- 
-}`;
-const StyledDatePicker = styled(DatePicker)`
-border: none;
-background-color: white;
-font-size: 12px;
-color: rgba(28, 28, 28, 0.6);
-outline: none;
-cursor: pointer;
+  &.Person {
+    row-gap: 0px;
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
-
+const StyledDatePicker = styled(DatePicker)`
+  border: none;
+  background-color: white;
+  font-size: 12px;
+  color: rgba(28, 28, 28, 0.6);
+  outline: none;
+  cursor: pointer;
+z-index: 9999;
+  @media (max-width: 750px) {
+    width: 100%;
+  }
+`;
 
 const FoodBar = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [restaurantType, setRestaurantType] = useState('Select');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -170,7 +206,6 @@ const FoodBar = () => {
 
   return (
     <SearchBarContainer>
-   
       <SearchOption>
         <img src={res} alt="Restaurant Icon" />
         <div>
@@ -194,36 +229,28 @@ const FoodBar = () => {
           </CustomSelectContainer>
         </div>
       </SearchOption>
+
       <SearchOption>
-
-<img src={available} alt="Calendar Icon" />
-<Div>
-  <span>Check in</span>
-
-<StyledDatePicker
-  selected={startDate}
-  onChange={(date) => setStartDate(date)}
-  dateFormat="dd MMM yyyy" 
-
-/>
-
-
-</Div>
-</SearchOption>
-     
-      
-        
-      <SearchOption>
-      <img src={search} alt="" />
-      <Div>
-      <span>Food</span>
-        <SearchInput type="text" placeholder="Search the food" />
-     
-      </Div>
+        <img src={available} alt="Calendar Icon" />
+        <Div>
+          <span>Check in</span>
+          <StyledDatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="dd MMM yyyy"
+          />
+        </Div>
       </SearchOption>
-   
-      <SearchButton>Search</SearchButton>
 
+      <SearchOption>
+        <img src={search} alt="Search Icon" />
+        <Div>
+          <span>Food</span>
+          <SearchInput type="text" placeholder="Search the food" />
+        </Div>
+      </SearchOption>
+
+      <SearchButton>Search</SearchButton>
     </SearchBarContainer>
   );
 };
